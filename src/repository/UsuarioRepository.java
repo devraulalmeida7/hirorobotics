@@ -64,8 +64,49 @@ public class UsuarioRepository {
 	        System.out.println("Erro na conexão: " + e.getMessage());
 	    }
 		
+		
 	}
 	
-
+	public void atualizarUsuario(int id,String nome) {
+		String sql = "UPDATE usuario SET nome = ? WHERE id = ?";
+		
+		try {
+			Connection conexao = Connect.conectar();
+			
+			PreparedStatement stmt = conexao.prepareStatement(sql);
+			
+			stmt.setString(1, nome);
+			stmt.setInt(2, id);
+			stmt.executeUpdate();
+			
+			System.out.println("Usuário alterado com sucesso!");
+			System.out.println("Seu nome é:" + nome);
+			
+		}
+		catch (SQLException e) {
+	        System.out.println("Erro na conexão: " + e.getMessage());
+	    }
+	}
+	
+	public void deletarUsuario(int id) {
+		String sql = "DELETE FROM usuario where id = ?";
+		
+		try {
+			Connection conexao = Connect.conectar();
+			
+			PreparedStatement stmt = conexao.prepareStatement(sql);
+			
+			stmt.setInt(1, id);
+			stmt.executeUpdate();
+			
+			System.out.println("Usuário de id:" +id+"  deletado com sucesso!");
+			
+		}
+		catch (SQLException e) {
+	        System.out.println("Erro na conexão: " + e.getMessage());
+	    }
+	}
+	
+	
 
 }
